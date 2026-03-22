@@ -1,0 +1,108 @@
+{
+  "id": "asas-rpg",
+  "name": "Asas RPG",
+  "version": "1.0",
+
+  "stats": [
+    { "id": "vitalidade", "name": "Vitalidade", "defaultValue": 0 },
+    { "id": "fortitude", "name": "Fortitude", "defaultValue": 0 },
+    { "id": "destreza", "name": "Destreza", "defaultValue": 0 },
+    { "id": "forca", "name": "Força", "defaultValue": 0 },
+    { "id": "inteligencia", "name": "Inteligência", "defaultValue": 0 },
+    { "id": "mente", "name": "Mente", "defaultValue": 0 },
+    { "id": "vigor", "name": "Vigor", "defaultValue": 0 }
+  ],
+
+  "resources": [
+    {
+      "id": "vida",
+      "name": "Vida",
+      "max": "vitalidade * 6 + forca * 2",
+      "current": "max"
+    },
+    {
+      "id": "mana",
+      "name": "Mana",
+      "max": "20 + (mente * 15) + (inteligencia * 5)",
+      "current": "max"
+    },
+    {
+      "id": "estamina",
+      "name": "Estamina",
+      "max": "vigor * 15",
+      "current": "max"
+    }
+  ],
+
+  "derivedStats": [
+    {
+      "id": "defesa",
+      "name": "Defesa",
+      "value": "fortitude * 2"
+    },
+    {
+      "id": "velocidade",
+      "name": "Velocidade",
+      "value": "destreza"
+    },
+    {
+      "id": "esquiva",
+      "name": "Esquiva",
+      "value": "destreza * 2"
+    },
+    {
+      "id": "dano_fisico",
+      "name": "Dano Físico",
+      "value": "forca"
+    },
+    {
+      "id": "dano_magico",
+      "name": "Dano Mágico",
+      "value": "inteligencia"
+    },
+    {
+      "id": "resistencia_magica",
+      "name": "Resistência Mágica",
+      "value": "mente"
+    },
+    {
+      "id": "critico_chance",
+      "name": "Chance Crítica (%)",
+      "value": "10"
+    }
+  ],
+
+  "rules": [
+    {
+      "id": "bloqueio",
+      "name": "Bloqueio de Dano",
+      "description": "Se o dano for menor que a defesa, o dano é reduzido a 0",
+      "formula": "dano <= defesa ? 0 : dano"
+    }
+  ],
+
+  "actions": [
+    {
+      "id": "ataque_basico",
+      "name": "Ataque Básico",
+      "description": "Ataque físico padrão",
+      "cost": {
+        "estamina": 5
+      },
+      "effect": {
+        "damage": "forca"
+      }
+    },
+    {
+      "id": "defender",
+      "name": "Defender",
+      "description": "Cria um escudo baseado na defesa",
+      "cost": {
+        "estamina": 10
+      },
+      "effect": {
+        "shield": "fortitude * 2"
+      }
+    }
+  ]
+}
